@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Message Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #f5f5f5;
+            border-right: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .chat-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .chat-item {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .chat-item:hover {
+            background-color: #e9ecef;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .username-section {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .username-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-display {
+            flex-grow: 1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            display: none;
+            padding: 20px;
+            background-color: white;
+            min-height: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success {
+            color: green;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        #messageForm {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar" id="sidebar">
+        <h2>Your Chats</h2>
+        <ul class="chat-list" id="chatList"></ul>
+    </div>
+
+    <div class="main-content">
+        <div class="username-section">
+            <div class="username-container">
+                <input type="text" id="username" placeholder="Enter your username" required>
+                <button id="setUsername">Set Username</button>
+            </div>
+            <div id="usernameError" class="error"></div>
+        </div>
+
+        <div id="chatDisplay" class="chat-display"></div>
+
+        <form id="messageForm">
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" rows="4" required></textarea>
+                <div id="messageError" class="error"></div>
+            </div>
+            <div class="form-group">
+                <label for="recipients">Recipients (comma-separated usernames):</label>
+                <input type="text" id="recipients" required>
+                <div id="recipientsError" class="error"></div>
+            </div>
+            <button type="submit">Send Message</button>
+            <div id="successMessage" class="success">Message sent successfully!</div>
+        </form>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
